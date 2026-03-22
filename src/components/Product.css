@@ -1,0 +1,33 @@
+/* Product.css */
+.product {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    min-height: 120px; /* קטן יותר */
+    border: 1px solid #eee;
+}
+
+.product:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    border-color: #6c5ce7;
+}
+
+.product h3:first-of-type {
+    font-size: 0.9rem;
+    color: #2d3436;
+    margin: 5px 0;
+}
+
+.product h3:last-of-type {
+    font-size: 1.1rem;
+    color: #2ecc71;
+    font-weight: 700;
+}

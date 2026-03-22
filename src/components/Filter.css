@@ -1,0 +1,52 @@
+/* Filter.css - תיקון סידור אופקי בלבד */
+
+/* אנחנו פונים לדיב שעוטף את הקטגוריות. 
+   בקוד ה-JSX שלך הוא קיבל את המחלקה 'category-item' בטעות. */
+.filterArea .category-item {
+    /* הופך את הקונטיינר ל-Flexbox אופקי במקום Block אנכי */
+    display: flex !important; 
+    flex-direction: row !important;
+    flex-wrap: wrap !important; /* ירידת שורה אם אין מקום */
+    justify-content: center !important;
+    gap: 12px !important; /* רווח בין הכפתורים */
+    
+    /* מוודא שהקונטיינר לא תופס עיצוב של כפתור בודד */
+    background: transparent !important;
+    border: none !important;
+    width: 100% !important;
+}
+
+
+
+/* מוודא שהקטגוריות שבתוך ה-map יסתדרו אחת ליד השנייה */
+.filterArea .category-item .category {
+    display: inline-block !important;
+    width: auto !important; /* מבטל תפיסת שורה שלמה */
+    padding: 8px 16px !important;
+    cursor: pointer !important;
+    white-space: nowrap !important;
+}
+
+/* הסתרת הפילטר כשהוא לא אמור להופיע */
+/* בודק אם ב-Inline Style כתוב none */
+.filterArea .category-item[style*="display: none"],
+.filterArea .category-item[style*="display:none"] {
+    display: none !important;
+}
+
+.filterButton {
+      
+      
+    /* מוודא שהקונטיינר לא תופס עיצוב של כפתור בודד */
+    /* background: purple; */
+    border: black;
+    text-decoration-color: aliceblue;
+    width: 150px;
+    height: 70px;
+    /* style={{ color: 'white', textAlign: 'center', textJustify: 'distribute'}} */
+    color: white;
+    display: flex !important;           /* חובה כדי שהמרכוז יעבוד */
+    align-items: center !important;      /* ממרכז אנכית */
+    justify-content: center !important;  /* ממרכז אופקית */
+    text-align: center;
+}

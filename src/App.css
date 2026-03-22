@@ -1,0 +1,18 @@
+/* App.css */
+.prouctGallery {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
+    gap: 20px !important;
+    padding: 20px !important;
+}
+
+.filterButton {
+    background-color: #6c5ce7 !important;
+    border-radius: 50px !important;
+    transition: 0.3s !important;
+}
+
+.filterButton:hover {
+    transform: scale(1.05) !important;
+    background-color: #5649c0 !important;
+}
