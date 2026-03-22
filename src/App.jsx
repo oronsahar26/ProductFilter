@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState , useEffect} from 'react'
 import './App.css'
 import ProductGallery from './components/ProductGallery.jsx'
 
@@ -14,31 +14,66 @@ function App() {
   const [categories, SetCategories] = useState([]);
   const [selectedCategory, SetSelectedCategory] = useState('all');
 
+  const [filteredProducts, SetFilteredProducts] = useState([]);
 
-  function InitProductList(productList)
-  {
-    debugger;
-    console.log(productList);
-    SetPorducts(productList);
+   // Fetching the data only in the first launch of the component    
+    useEffect(() => {        
+        GetProducts();
+    }, [])
 
-    // Initializes the categories out of the products
-    const tempCat = productList.map(item=>item.category);
 
-     
-    // Gets only unique values using set fucntion
-    const uniqueCat = new Set(tempCat);
+    async function GetProducts()
+    {
+        try
+        {
+             // Using the await function to force the fetch to keep trying untill the answare is recieved
+            const response = await fetch ('https://dummyjson.com/products?limit=194',
+                {
+                    headers : 
+                    {
+                        // Enables getting json as a result
+                        'Accept' : 'application/json',
+                        'Content-Type' : 'application/json'
+                    },
+                    method :       
+                        'get',              
+                }
+            )
 
-   // Gets the unique categories only
-    SetCategories(['all', ...uniqueCat]);
+            if (!response.ok)
+            {
+                throw new Error('HTTP error!' + response.status);
+            }
 
-    console.log(categories);
+            // Turns the string response into JSON/Array
+            const data = await response.json();
 
-  }
+            debugger;
 
-  // Gets the filtered products
-  const filteredProducts = selectedCategory === 'all' 
-  ? products 
-  : products.filter(item => item.category === selectedCategory);
+            // Sets the useSate of the products using the transfered function
+            SetPorducts(data.products);
+
+            // Initializes the categories out of the products
+            const tempCat = data.products.map(item=>item.category);
+            
+            // Gets only unique values using set fucntion
+            const uniqueCat = new Set(tempCat);
+
+            SetCategories(['all', ...uniqueCat]);
+
+            SetFilteredProducts(data.products);
+
+              
+
+
+        }
+        catch (err) 
+        {
+                console.log('Cannot import products - Error: ' + err);
+        }  
+    }
+
+  
  
 
 
@@ -46,7 +81,22 @@ function App() {
   function SelectCategoryFunc(selectedCategory){
     debugger;
     SetSelectedCategory(selectedCategory);
-  }
+
+
+    if (selectedCategory === 'all') 
+      {
+          SetFilteredProducts(products)
+      } 
+      else 
+      {
+          SetFilteredProducts(products.filter(product => product.category === selectedCategory))
+      }
+
+            // Gets the filtered products
+            // const filteredProducts = selectedCategory === 'all' 
+            // ? products 
+            // : products.filter(item => item.category === selectedCategory);
+    }
 
 
 
@@ -56,7 +106,7 @@ function App() {
       {/* wraps the ProductGallery Component with context  */}
       
       <AppContext.Provider value = {{categories, SelectCategoryFunc, selectedCategory}}>             
-          <ProductGallery InitProductListFunc={InitProductList} productList={filteredProducts} />    
+          <ProductGallery productList={filteredProducts} />    
       </AppContext.Provider>
     </>
   )

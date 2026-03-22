@@ -6,7 +6,8 @@ function Product({product}) {
     <div className='product'>
         <h3>{product.title}</h3>
         <h3>{product.price}</h3>
-        <h4>{product.id}</h4>
+        <h5>{product.id}</h5>
+        <h5>{product.category}</h5>
         
     </div>
   )
