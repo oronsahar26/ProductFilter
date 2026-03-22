@@ -1,7 +1,7 @@
 /* Product.css */
 .product {
     background-color: #ffffff;
-    border-radius: 12px;
+    border-radius: 13px;
     padding: 15px;
     display: flex;
     flex-direction: column;
@@ -10,8 +10,9 @@
     transition: all 0.3s ease;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    min-height: 120px; /* קטן יותר */
+    min-height: 121px; /* קטן יותר */
     border: 1px solid #eee;
+    display: flex; /* שינוי קטן או סתם הערה */
 }
 
 .product:hover {
